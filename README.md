@@ -19,13 +19,13 @@ Enter command in the format below and it will download every torrent or a series
 
 ` $ python3 scraper.py [path] [sukebei] [name] [user]`
 
-path: path to folder to check for duplicates
+`[path]`: path to folder to check for duplicates
 
-sukebei: 0 for vanilla nyaasi and 1 for sukebei
+`[sukebei]`: 0 for vanilla nyaasi and 1 for sukebei
 
-name: name of torrent
+`[name]`: name of torrent
 
-user: name of torrent uploader
+`[user]`: name of torrent uploader
 
 **Example:**
 
