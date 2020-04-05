@@ -8,6 +8,7 @@ import webbrowser
 import time
 
 
+folder = '/home/synapse26/Downloads/FAKKU/'  # change this folder to your destination folder to check for duplicates
 fakkuHTML = requests.get('https://sukebei.nyaa.si/user/rbot2000') # change this part if you want to download from another user
 fakkuHTML.raise_for_status()
 fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
@@ -18,7 +19,7 @@ def checklink(links): # check for torrents that you want to get
 	linkslist = []
 	for link in links:
 		text = link.getText().lower()
-		if not text.startswith("fakku") or os.path.isdir('/home/synapse26/Downloads/FAKKU/' + text):
+		if not text.startswith("fakku") or os.path.isdir(folder + text):
 		# change this part if you want to download a series from another user
 			continue
 		linkslist.append(link)
