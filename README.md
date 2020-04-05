@@ -6,6 +6,7 @@ Change the username accordingly and it will download every torrent or a series o
 **Features:**
 - check destination folder to check for duplicates and not download them
 - alow changing variables to change folder and torrent uploader
+- more to come
 
 
 **Guide:**
