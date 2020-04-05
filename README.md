@@ -2,7 +2,7 @@
 
 Note: I'm not responsible for bricking your computer.
 
-Change the username accordingly and it will download every torrent or a series of torrents from that user (leaving it at default will download all fakku torrents from user rbot2000). Although from really old Nyaasi torrents with just download links and no magnet links will be ignore.
+Enter command in the format below and it will download every torrent or a series of torrents from specified user. Although from really old Nyaasi torrents with just download links and no magnet links will be ignore. 
 
 
 **Features:**
