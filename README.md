@@ -15,9 +15,13 @@ Change the username accordingly and it will download every torrent or a series o
 - get .py file from release
 - pass arguments along with the file in the format below to continue
 ``` $ python3 scraper.py [path] [sukebei] [name] [user]```
+
 path: path to folder to check for duplicates
+
 sukebei: 0 for vanilla nyaasi and 1 for sukebei
+
 name: name of torrent
+
 user: name of torrent uploader
 
 **Example:**
