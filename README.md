@@ -16,6 +16,7 @@ Change the username accordingly and it will download every torrent or a series o
 - Run ` $ pip3 install bs4 requests ` if you don't have them
 - Get .py file from release
 - Pass arguments along with the file in the format below to continue
+
 ` $ python3 scraper.py [path] [sukebei] [name] [user]`
 
 path: path to folder to check for duplicates
