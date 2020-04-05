@@ -8,30 +8,31 @@ import webbrowser
 import time
 
 
-fakkuHTML = requests.get('https://sukebei.nyaa.si/user/rbot2000')
+fakkuHTML = requests.get('https://sukebei.nyaa.si/user/rbot2000') # change this part if you want to download from another user
 fakkuHTML.raise_for_status()
 fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
 fakkuLinks = fakkuSoup.select("tbody > tr > td > a")
 
 
-def checklink(links): # find list of fakku torrent that haven't been downloaded yet
+def checklink(links): # check for torrents that you want to get
 	linkslist = []
 	for link in links:
 		text = link.getText().lower()
 		if not text.startswith("fakku") or os.path.isdir('/home/synapse26/Downloads/FAKKU/' + text):
+		# change this part if you want to download a series from another user
 			continue
 		linkslist.append(link)
 	return linkslist
 
 
-def resultsetlist(resultset): # convert from resultset to list
+def resultsetlist(resultset): # convert resultset to list
 	resultlist = []
 	for set in resultset:
 		resultlist.append(set)
 	return resultlist
 
 
-def listmaker(linkslist, filterlist): # check if item exist in list[index] yet, if not then append to final list
+def listmaker(linkslist, filterlist): # add items that isn't in directory yet to list of downloads
 	finallist = []
 	for link in linkslist:
 		for filt in filterlist:
@@ -49,7 +50,7 @@ def findthelinks(dalist): # find all download link from final list
 	return dalinks
 
 
-def downloaddalist(downloadlist): # download the fucking torrent
+def downloaddalist(downloadlist): # download the torrent
 	for download in downloadlist:
 		webbrowser.open('https://sukebei.nyaa.si' + download)
 		time.sleep(1)
