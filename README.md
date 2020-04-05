@@ -1,20 +1,21 @@
 # NyaasiMassDownloader 
 
-Note: I'm not responsible for bricking your computer
-Change the username accordingly and it will download every torrent or a series of torrents from that user (leaving it at default will download all fakku torrents from user rbot2000). Although from really old Nyaasi torrents with just download links and no magnet links will be ignore
+Note: I'm not responsible for bricking your computer.
+
+Change the username accordingly and it will download every torrent or a series of torrents from that user (leaving it at default will download all fakku torrents from user rbot2000). Although from really old Nyaasi torrents with just download links and no magnet links will be ignore.
 
 
 **Features:**
-- check destination folder to check for duplicates and not download them
-- pass arguments via command line upon executing .py
-- more to come
+- Check destination folder to check for duplicates and not download them
+- Pass arguments via command line upon executing .py
+- More to come
 
 
 **Guide:**
-- make sure you have bs4 and requests installed
-- run ` $ pip3 install bs4 requests ` if you don't have them
-- get .py file from release
-- pass arguments along with the file in the format below to continue
+- Make sure you have bs4 and requests installed
+- Run ` $ pip3 install bs4 requests ` if you don't have them
+- Get .py file from release
+- Pass arguments along with the file in the format below to continue
 ` $ python3 scraper.py [path] [sukebei] [name] [user]`
 
 path: path to folder to check for duplicates
