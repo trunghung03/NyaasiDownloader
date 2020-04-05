@@ -1,4 +1,4 @@
-# NyaasiMassDownloader 
+# NyaasiDownloader 
 
 Note: I'm not responsible for bricking your computer.
 
