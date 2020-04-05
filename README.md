@@ -27,5 +27,6 @@ name: name of torrent
 user: name of torrent uploader
 
 **Example:**
+
 `$ python3 scraper.py ~/Downloads/FAKKU/ 1 fakku rbot2000`
 will download every fakku torrent from user rbot2000
