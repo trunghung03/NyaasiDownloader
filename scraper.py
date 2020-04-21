@@ -8,22 +8,6 @@ import webbrowser
 import time
 import sys
 
-folder = sys.argv[1]
-# folder to check for duplicates 
-# (please enter the correct folder if you have already downloaded some of the torrent
-# because if you don't it's gonna download the whole thing)
-torrent_name = sys.argv[3]
-user_name = sys.argv[4]
-if int(sys.argv[2]) == 0:  # 0 for vanilla and 1 for sukebei
-    url = 'https://nyaa.si'
-else:
-    url = 'https://sukebei.nyaa.si'
-
-fakkuHTML = requests.get('{}/user/{}'.format(url, user_name))
-fakkuHTML.raise_for_status()
-fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
-fakkuLinks = fakkuSoup.select('tbody > tr > td > a')
-
 
 def checklink(links):  # check for torrents that you want to get
     linkslist = []
@@ -65,6 +49,25 @@ def downloaddalist(downloadlist):  # download the torrent
     for download in downloadlist:
         webbrowser.open(url + download)
         time.sleep(1)
+
+
+def check_sukebei(number):
+    if number == 0:
+        return 'https://nyaa.si'
+    else:
+        return 'https://sukebei.nyaa.si'
+
+
+folder = sys.argv[1]
+# folder to check for duplicates 
+url = check_sukebei(int(sys.argv[2])) # 0 for vanilla and 1 for sukebei
+torrent_name = sys.argv[3]
+user_name = sys.argv[4]
+fakkuHTML = requests.get('{}/user/{}'.format(url, user_name))
+fakkuHTML.raise_for_status()
+fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
+fakkuLinks = fakkuSoup.select('tbody > tr > td > a')
+
 
 
 fakku = checklink(fakkuLinks)
