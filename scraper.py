@@ -10,45 +10,45 @@ import sys
 
 
 def checklink(links):  # check for torrents that you want to get
-    linkslist = []
+    alist = []
     for link in links:
         text = link.getText().lower()
         if not text.startswith(torrent_name) or os.path.isdir(folder + text):
             # change this part if you want to download a series from another user
             continue
-        linkslist.append(link)
-    return linkslist
+        alist.append(link)
+    return alist
 
 
 def resultsetlist(resultset):  # convert resultset to list
-    resultlist = []
+    alist = []
     for result in resultset:
-        resultlist.append(result)
-    return resultlist
+        alist.append(result)
+    return alist
 
 
-def listmaker(linkslist, filterlist):  # add items that isn't in directory yet to list of downloads
-    finallist = []
+def listmaker(linkslist, filter):  # add items that isn't in directory yet to list of downloads
+    alist = []
     for link in linkslist:
-        for filt in filterlist:
+        for filt in filter:
             if str(filt) in str(link):
-                finallist.append(link)
-    return finallist
+                alist.append(link)
+    return alist
 
 
-def findthelinks(dalist):  # find all download link from final list
-    dalinks = []
-    for dal in dalist:
-        for item in dal.find_all('a', href=re.compile('^/download/')):
+def findthelinks(list):  # find all download link from final list
+    linkslist = []
+    for link in list:
+        for item in link.find_all('a', href=re.compile('^/download/')):
             item = item.get('href')
-            dalinks.append(item)
-    return dalinks
+            linkslist.append(item)
+    return linkslist
 
 
 def downloaddalist(downloadlist):  # download the torrent
     for download in downloadlist:
         webbrowser.open(url + download)
-        time.sleep(1)
+        time.sleep(0.5)
 
 
 def check_sukebei(number):
@@ -63,13 +63,15 @@ folder = sys.argv[1]
 url = check_sukebei(int(sys.argv[2])) # 0 for vanilla and 1 for sukebei
 torrent_name = sys.argv[3]
 user_name = sys.argv[4]
+
+
 fakkuHTML = requests.get('{}/user/{}'.format(url, user_name))
 fakkuHTML.raise_for_status()
 fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
 fakkuLinks = fakkuSoup.select('tbody > tr > td > a')
-
-
-
 fakku = checklink(fakkuLinks)
-finalList = listmaker(resultsetlist(fakkuSoup.select('tbody > tr')), fakku)
-downloaddalist(findthelinks(finalList))
+fakkuList = listmaker(resultsetlist(fakkuSoup.select('tbody > tr')), fakku)
+downloaddalist(findthelinks(fakkuList))
+# example
+# $ python3 scraper.py ~/Downloads/FAKKU/ 1 fakku rbot2000 
+# will download every fakku torrent from user rbot2000
