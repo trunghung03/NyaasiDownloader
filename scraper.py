@@ -14,16 +14,8 @@ def checklink(links):  # check for torrents that you want to get
     for link in links:
         text = link.getText().lower()
         if not text.startswith(torrent_name) or os.path.isdir(folder + text):
-            # change this part if you want to download a series from another user
             continue
         alist.append(link)
-    return alist
-
-
-def resultsetlist(resultset):  # convert resultset to list
-    alist = []
-    for result in resultset:
-        alist.append(result)
     return alist
 
 
@@ -59,10 +51,10 @@ def check_sukebei(number):
 
 
 folder = sys.argv[1]
-# folder to check for duplicates 
-url = check_sukebei(int(sys.argv[2])) # 0 for vanilla and 1 for sukebei
+url = check_sukebei(int(sys.argv[2]))
 torrent_name = sys.argv[3]
 user_name = sys.argv[4]
+fakkuRawList = []
 
 
 fakkuHTML = requests.get('{}/user/{}'.format(url, user_name))
@@ -70,7 +62,7 @@ fakkuHTML.raise_for_status()
 fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
 fakkuLinks = fakkuSoup.select('tbody > tr > td > a')
 fakku = checklink(fakkuLinks)
-fakkuList = listmaker(resultsetlist(fakkuSoup.select('tbody > tr')), fakku)
+fakkuList = listmaker([a for a in fakkuSoup.select('tbody > tr')], fakku)
 downloaddalist(findthelinks(fakkuList))
 # example
 # $ python3 scraper.py ~/Downloads/FAKKU/ 1 fakku rbot2000 
