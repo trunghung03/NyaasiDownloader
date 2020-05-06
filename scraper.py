@@ -43,7 +43,6 @@ folder = sys.argv[1]
 url = check_sukebei(int(sys.argv[2]))
 torrent_name = sys.argv[3]
 user_name = sys.argv[4]
-fakkuRawList = []
 
 
 fakkuHTML = requests.get('{}/user/{}'.format(url, user_name))
