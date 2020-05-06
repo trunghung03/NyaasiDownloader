@@ -1,5 +1,3 @@
-# download fakku torrent from user rbot2000
-
 import bs4
 import requests
 import os
@@ -28,15 +26,6 @@ def listmaker(linkslist, filter):  # add items that isn't in directory yet to li
     return alist
 
 
-def findthelinks(list):  # find all download link from final list
-    linkslist = []
-    for link in list:
-        for item in link.find_all('a', href=re.compile('^/download/')):
-            item = item.get('href')
-            linkslist.append(item)
-    return linkslist
-
-
 def downloaddalist(downloadlist):  # download the torrent
     for download in downloadlist:
         webbrowser.open(url + download)
@@ -63,7 +52,7 @@ fakkuSoup = bs4.BeautifulSoup(fakkuHTML.text, features='lxml')
 fakkuLinks = fakkuSoup.select('tbody > tr > td > a')
 fakku = checklink(fakkuLinks)
 fakkuList = listmaker([a for a in fakkuSoup.select('tbody > tr')], fakku)
-downloaddalist(findthelinks(fakkuList))
+downloaddalist([item.get('href') for item in [link.find('a', href=re.compile('^/download/')) for link in fakkuList]])
 # example
 # $ python3 scraper.py ~/Downloads/FAKKU/ 1 fakku rbot2000 
 # will download every fakku torrent from user rbot2000
