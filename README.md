@@ -28,6 +28,6 @@ Enter command in the format below and it will download every torrent or a series
 `[user]`: name of torrent uploader
 
 **Example:**
-
+`$ python3 scraper.py`
 `$ python3 scraper.py --l ~/Downloads/FAKKU/ --s 1 --n fakku --u rbot2000`
 will download every fakku torrent from user rbot2000
