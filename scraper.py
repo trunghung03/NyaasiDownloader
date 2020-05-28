@@ -7,6 +7,8 @@ import time
 import sys
 import argparse
 
+from getpass import getuser
+
 
 def checklink(links, no1, no3):  
     torrent_name = no3
@@ -43,7 +45,7 @@ def make_link(no4, no2):
 
 def main(): 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--l', type=str, default="/home/synapse26/Downloads/FAKKU/", 
+    parser.add_argument('--l', type=str, default="/home/{}/Downloads/FAKKU/".format(getuser()), 
                         help="Name location that you want to check for existing files.")
     parser.add_argument('--s', type=str, default="1", 
                         help="0 for vanilla; 1 for sukebei.")
