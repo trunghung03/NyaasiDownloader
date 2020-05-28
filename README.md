@@ -17,7 +17,7 @@ Enter command in the format below and it will download every torrent or a series
 - Get .py file from release
 - Pass arguments along with the file in the format below to continue
 
-` $ python3 scraper.py [path] [sukebei] [name] [user]`
+` $ python3 scraper.py --l [path] --s [sukebei] --n [name] --u [user]`
 
 `[path]`: path to folder to check for duplicates
 
@@ -29,5 +29,5 @@ Enter command in the format below and it will download every torrent or a series
 
 **Example:**
 
-`$ python3 scraper.py ~/Downloads/FAKKU/ 1 fakku rbot2000`
+`$ python3 scraper.py --l ~/Downloads/FAKKU/ --s 1 --n fakku --u rbot2000`
 will download every fakku torrent from user rbot2000
