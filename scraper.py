@@ -10,9 +10,7 @@ import argparse
 from pathlib import Path
 
 
-def checklink(links, no1, no3):  
-    torrent_name = no3
-    folder = no1
+def checklink(links, folder, torrent_name):  
     alist = []
     for link in links:
         text = link.getText().lower()
@@ -45,7 +43,7 @@ def make_link(no4, no2):
 
 def main(): 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--l', type=str, default="{}{}".format(str(Path.home()), "/Downloads/FAKKU/"), # returns /home/usr/ + wherever you wanna check
+    parser.add_argument('--l', type=str, default="{}".format(os.path.expanduser("~/Downloads/FAKKU/")), # returns /home/usr/ + wherever you wanna check
                         help="Name location that you want to check for existing files.")
     parser.add_argument('--s', type=str, default="1", 
                         help="0 for vanilla; 1 for sukebei.")
@@ -55,15 +53,19 @@ def main():
                         help="Name of user.")
     args = parser.parse_args()
 
+    print(args.l, args.s, args.n, args.n, args.u)
+
     url = check_sukebei(args.s)
     prelink = make_link(args.u, args.s)
     soup = [a for a in prelink.select('tbody > tr')]
     filter = checklink(prelink.select('tbody > tr > td > a'), args.l, args.n)
-    precum = [link.find('a', href=re.compile('^/download/')) for link in listmaker(soup, filter)]
-    links = [item.get('href') for item in precum]
+    links = [link.find('a', href=re.compile('^/download/')) for link in listmaker(soup, filter)]
     for download in links:
-        webbrowser.open(url + download)
-        time.sleep(0.5)
+        try:
+            webbrowser.open(url + download['href'])
+        except TypeError:
+            print('Download link is unavailable')
+        time.sleep(1)
 
 if __name__ == "__main__":
     main()
